@@ -2,6 +2,27 @@ import Head from "next/head";
 import styled from "styled-components";
 import { useState } from "react";
 
+interface Deliverable {
+  text: string;
+  completed?: boolean;
+}
+
+interface Metric {
+  value: string;
+  label: string;
+}
+
+interface Phase {
+  id: string;
+  title: string;
+  timeline: string;
+  status: 'progress' | 'planned' | 'vision';
+  description: string;
+  objectives: string[];
+  deliverables: Deliverable[];
+  metrics: Metric[];
+}
+
 const PageWrapper = styled.div`
   background: linear-gradient(135deg, ${({ theme }) => theme.darkBg} 0%, ${({ theme }) => theme.charcoal} 100%);
   color: ${({ theme }) => theme.white};
@@ -386,7 +407,7 @@ const TimelineDescription = styled.p`
   margin: 0;
 `;
 
-const phases = [
+const phases: Phase[] = [
   {
     id: 'phase1',
     title: 'Foundation & MVP',
@@ -519,8 +540,6 @@ const timelineData = [
 
 export default function RoadmapPage() {
   const [activePhase, setActivePhase] = useState('phase1');
-
-  const currentPhase = phases.find(phase => phase.id === activePhase);
 
   return (
     <>
