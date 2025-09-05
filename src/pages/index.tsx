@@ -858,6 +858,16 @@ export default function ArtLending() {
                 <CTAButton variant="primary">Start as an Artist</CTAButton>
                 <CTAButton variant="secondary">Start as a Backer</CTAButton>
               </CTAButtons>
+              <CTAButtons style={{ marginTop: '1rem', justifyContent: 'center' }}>
+                <CTAButton 
+                  as="a" 
+                  href="/roadmap" 
+                  variant="secondary" 
+                  style={{ minWidth: '200px', textAlign: 'center' }}
+                >
+                  📍 View Our Roadmap
+                </CTAButton>
+              </CTAButtons>
             </HeroContent>
             
             <HeroVisual>
@@ -1084,6 +1094,7 @@ export default function ArtLending() {
             <FinalCTAButton variant="secondary">List Your Artwork</FinalCTAButton>
           </FinalCTAButtons>
           <SocialLinks>
+            <SocialLink href="/roadmap">View Roadmap</SocialLink>
             <SocialLink href="#">Join Discord</SocialLink>
             <SocialLink href="#">Follow Updates</SocialLink>
             <SocialLink href="#">Newsletter</SocialLink>
