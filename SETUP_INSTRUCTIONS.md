@@ -15,6 +15,7 @@ yarn install
 This will install:
 - `styled-components@^6.1.8`
 - `@types/styled-components@^5.1.34`
+- `babel-plugin-styled-components@^2.1.4`
 
 ## What's Been Fixed
 
@@ -23,6 +24,7 @@ This will install:
 ✅ **TypeScript Declarations** - Added proper type definitions
 ✅ **Styled Components Syntax** - Fixed all template literal and conditional syntax issues
 ✅ **Next.js Configuration** - Enabled styled-components compiler
+✅ **Server-Side Rendering** - Configured styled-components SSR with proper style injection
 ✅ **Font Loading** - Added Google Fonts (Inter & Playfair Display)
 
 ## Remaining TypeScript Warnings
