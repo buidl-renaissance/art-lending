@@ -23,6 +23,14 @@ interface Phase {
   metrics: Metric[];
 }
 
+interface WeeklyGoal {
+  week: number;
+  title: string;
+  focus: string;
+  deliverables: string[];
+  metrics: string[];
+}
+
 const PageWrapper = styled.div`
   background: linear-gradient(135deg, ${({ theme }) => theme.darkBg} 0%, ${({ theme }) => theme.charcoal} 100%);
   color: ${({ theme }) => theme.white};
@@ -407,147 +415,303 @@ const TimelineDescription = styled.p`
   margin: 0;
 `;
 
+const WeeklyBreakdown = styled.div`
+  margin: 4rem 0;
+  padding: 3rem;
+  background: rgba(64, 224, 208, 0.05);
+  border-radius: 20px;
+  border: 2px solid ${({ theme }) => theme.teal}40;
+`;
+
+const WeeklyTitle = styled.h3`
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: ${({ theme }) => theme.teal};
+  text-align: center;
+  margin-bottom: 3rem;
+`;
+
+const WeeklyGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+`;
+
+const WeekCard = styled.div`
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  border-left: 4px solid ${({ theme }) => theme.teal};
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+`;
+
+const WeekNumber = styled.div`
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: ${({ theme }) => theme.teal};
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+`;
+
+const WeekTitle = styled.h4`
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.white};
+  margin-bottom: 1rem;
+`;
+
+const WeekFocus = styled.p`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.gold};
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`;
+
+const WeekList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+`;
+
+const WeekListItem = styled.li`
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+
+  &::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: ${({ theme }) => theme.teal};
+    font-weight: bold;
+  }
+`;
+
 const phases: Phase[] = [
   {
-    id: 'phase1',
-    title: 'Foundation & MVP',
-    timeline: 'October - December 2025',
+    id: 'mvp',
+    title: '4-Week MVP Sprint',
+    timeline: '4 weeks from today',
     status: 'progress' as const,
-    description: 'Launch core platform with basic loan functionality, onboard pilot artists, and establish proof of concept.',
+    description: 'Focused MVP with one active loan (Danny\'s artwork). Build functioning contract and marketing mechanism to prove the core concept.',
     objectives: [
-      'Launch core platform with basic loan functionality',
-      'Onboard pilot artists and establish proof of concept',
-      'Build foundational community and validate market fit'
+      'Create functioning loan contract and legal structure',
+      'Build marketing mechanism for community participation',
+      'Complete one successful loan cycle with Danny',
+      'Validate the micro-credit + revenue-share model'
     ],
     deliverables: [
       { text: 'Landing Page & Branding', completed: true },
-      { text: 'Smart Contracts v1.0 - Basic loan creation and management' },
-      { text: 'Artist Dashboard v1.0 - Loan applications and portfolio' },
-      { text: 'Backer Dashboard v1.0 - Browse and invest interface' },
-      { text: 'User authentication with Web3 wallets' },
-      { text: 'Database schema and API routes' },
-      { text: 'Artist membership system ($10/month)' }
+      { text: 'Simple loan contract template and legal structure' },
+      { text: 'Danny\'s artwork documented and appraised' },
+      { text: 'Basic web interface for single loan' },
+      { text: 'Stripe payment processing setup' },
+      { text: 'Marketing landing page and community outreach' },
+      { text: 'Print marketplace setup (basic)' },
+      { text: 'One complete loan-to-sale cycle documented' }
     ],
     metrics: [
-      { value: '3-5', label: 'Verified Artists' },
-      { value: '5-10', label: 'Loan Cycles' },
-      { value: '50+', label: 'Registered Backers' },
-      { value: '$2-5K', label: 'Total Loans' }
+      { value: '1', label: 'Active Loan' },
+      { value: '10-20', label: 'Community Backers' },
+      { value: '$500-1500', label: 'Total Raised' },
+      { value: '1', label: 'Proof of Concept' }
     ]
   },
   {
-    id: 'phase2',
-    title: 'Fractionalization & Marketplace',
-    timeline: 'Q1 2026 (January - March)',
+    id: 'scale',
+    title: 'Scale & Automation',
+    timeline: 'Weeks 5-8 (Post-MVP)',
     status: 'planned' as const,
-    description: 'Enable micro-investments through loan fractionalization, launch secondary marketplace, and scale community growth.',
+    description: 'Scale artist pipeline, improve platform based on user feedback, and add automation to reduce manual processes.',
     objectives: [
-      'Enable micro-investments through loan fractionalization',
-      'Launch secondary marketplace for loan rights trading',
-      'Scale artist onboarding and community growth'
+      'Scale to 10-15 active artists',
+      'Improve platform based on MVP feedback',
+      'Expand community to 100+ backers',
+      'Add automated systems and enhanced features'
     ],
     deliverables: [
-      { text: 'Fractional Loan Rights (ERC-1155) - Tokenized loan fractions' },
-      { text: 'Marketplace Contract - P2P trading of loan fractions' },
-      { text: 'Automated Repayment System - Smart contract triggers' },
-      { text: 'Enhanced Dashboards - Advanced portfolio analytics' },
-      { text: 'Gamification System - Badges and leaderboards' },
-      { text: 'Artist Success Programs - Referral incentives' }
+      { text: 'Automated loan processing and underwriting' },
+      { text: 'Enhanced artist dashboard with analytics' },
+      { text: 'Mobile-responsive improvements' },
+      { text: 'Gallery partnership integrations' },
+      { text: 'Advanced print marketplace features' },
+      { text: 'Community features and social proof' }
     ],
     metrics: [
-      { value: '15+', label: 'Active Artists' },
-      { value: '200+', label: 'Registered Users' },
-      { value: '$10K+', label: 'Active Loans' },
-      { value: '500+', label: 'Fraction Trades' }
+      { value: '10-15', label: 'Active Artists' },
+      { value: '100+', label: 'Community Backers' },
+      { value: '$20K+', label: 'Total Loans' },
+      { value: '80%', label: 'Automated Processes' }
     ]
   },
   {
-    id: 'phase3',
-    title: 'Events & Automation',
-    timeline: 'Q2-Q3 2026 (April - September)',
-    status: 'planned' as const,
-    description: 'Integrate with physical art events, implement automated valuation, and establish sustainable revenue streams.',
-    objectives: [
-      'Integrate with physical art events and galleries',
-      'Implement automated valuation and risk assessment',
-      'Establish sustainable revenue streams and partnerships'
-    ],
-    deliverables: [
-      { text: 'AI-Powered Valuation Engine - Automated artwork pricing' },
-      { text: 'Oracle Integration - Real-time market data feeds' },
-      { text: 'Gallery Partnership System - Event integrations' },
-      { text: 'POAP & NFT Integration - Digital twins and perks' },
-      { text: 'Premium Features - Advanced analytics and access' },
-      { text: 'Sponsorship Program - Corporate partnerships' }
-    ],
-    metrics: [
-      { value: '100+', label: 'Artworks' },
-      { value: '$50K+', label: 'Total Loans' },
-      { value: '5+', label: 'Gallery Partners' },
-      { value: '$5K+', label: 'Monthly Revenue' }
-    ]
-  },
-  {
-    id: 'phase4',
+    id: 'expansion',
     title: 'Multi-City Expansion',
-    timeline: '2027+',
-    status: 'vision' as const,
-    description: 'Expand to multiple cities, integrate with broader DeFi ecosystems, and establish as a global cooperative.',
+    timeline: 'Months 2-6 (2025)',
+    status: 'planned' as const,
+    description: 'Expand to additional cities, integrate with galleries, and establish sustainable revenue streams with institutional partnerships.',
     objectives: [
-      'Expand to multiple cities and art markets',
-      'Integrate with broader DeFi and NFT ecosystems',
-      'Establish Open Artist Bank as a global cooperative'
+      'Launch in Chicago, Austin, or Portland',
+      'Integrate with galleries and art institutions',
+      'Establish sustainable revenue and partnerships',
+      'Build advanced features and automation'
     ],
     deliverables: [
-      { text: 'Multi-City Architecture - Federated city networks' },
-      { text: 'DeFi Integration - Yield farming and protocol integration' },
-      { text: 'DAO Structure - Community governance tokens' },
-      { text: 'Global Expansion - 10+ active markets' },
-      { text: 'Celebrity Partnerships - High-profile campaigns' },
-      { text: 'Institutional Features - Accredited investor tools' }
+      { text: 'Multi-city platform architecture' },
+      { text: 'Gallery partnership program' },
+      { text: 'AI-powered valuation engine' },
+      { text: 'Mobile app (iOS/Android)' },
+      { text: 'Advanced analytics and reporting' },
+      { text: 'Corporate sponsorship program' }
     ],
     metrics: [
-      { value: '10+', label: 'Active Cities' },
-      { value: '$1M+', label: 'Facilitated Loans' },
-      { value: '1000+', label: 'Artists' },
-      { value: '10K+', label: 'Backers' }
+      { value: '3+', label: 'Active Cities' },
+      { value: '50+', label: 'Active Artists' },
+      { value: '500+', label: 'Community Members' },
+      { value: '$100K+', label: 'Total Loans' }
+    ]
+  },
+  {
+    id: 'global',
+    title: 'Global Platform',
+    timeline: '2026+ (Long-term Vision)',
+    status: 'vision' as const,
+    description: 'Establish global network of artist banks, integrate with DeFi ecosystems, and create open-source protocol for community adoption.',
+    objectives: [
+      'Launch in 10+ cities globally',
+      'Integrate with broader DeFi and NFT ecosystems',
+      'Create open-source protocol for community forking',
+      'Establish as a global cooperative with DAO governance'
+    ],
+    deliverables: [
+      { text: 'Global federated network architecture' },
+      { text: 'DeFi protocol integration and yield farming' },
+      { text: 'DAO governance with community tokens' },
+      { text: 'Open-source Artist Bank Protocol' },
+      { text: 'Celebrity and institutional partnerships' },
+      { text: 'Advanced AI valuation and risk systems' }
+    ],
+    metrics: [
+      { value: '10+', label: 'Global Cities' },
+      { value: '$1M+', label: 'Annual Loans' },
+      { value: '1000+', label: 'Active Artists' },
+      { value: '10K+', label: 'Community Members' }
+    ]
+  }
+];
+
+const weeklyGoals: WeeklyGoal[] = [
+  {
+    week: 1,
+    title: 'Contract & Legal Foundation',
+    focus: 'Core legal structure and basic contract',
+    deliverables: [
+      'Simple loan contract template',
+      'Basic terms and conditions',
+      'Danny\'s artwork documented and appraised',
+      'Legal structure for single loan'
+    ],
+    metrics: [
+      'Loan contract ready for use',
+      'Danny\'s artwork appraised and documented',
+      'Legal framework established'
+    ]
+  },
+  {
+    week: 2,
+    title: 'Payment Processing & Platform',
+    focus: 'Basic payment system and user interface',
+    deliverables: [
+      'Stripe payment processing setup',
+      'Simple loan management tracking',
+      'Basic web interface for Danny\'s loan',
+      'Manual backer onboarding process'
+    ],
+    metrics: [
+      'Payment system operational',
+      'Danny\'s loan page live',
+      'Manual processes documented'
+    ]
+  },
+  {
+    week: 3,
+    title: 'Community & Marketing',
+    focus: 'Marketing mechanism and community building',
+    deliverables: [
+      'Marketing landing page for Danny\'s loan',
+      'Community outreach campaign',
+      'Print marketplace setup (basic)',
+      'Backer registration and investment flow'
+    ],
+    metrics: [
+      'Marketing page live and functional',
+      '10-20 potential backers identified',
+      'Print ordering system ready'
+    ]
+  },
+  {
+    week: 4,
+    title: 'Launch & Validation',
+    focus: 'Single loan launch and proof of concept',
+    deliverables: [
+      'Danny\'s loan goes live for community funding',
+      'Complete one successful loan cycle',
+      'Document the entire process',
+      'Gather feedback for iteration'
+    ],
+    metrics: [
+      '1 active loan successfully funded',
+      '$500-1500 raised from community',
+      'Loan-to-sale process documented',
+      'Proof of concept validated'
     ]
   }
 ];
 
 const timelineData = [
   {
-    date: 'Oct-Dec 2025',
-    phase: 'Foundation & MVP',
-    description: 'Launch core platform, onboard pilot artists, validate market fit'
+    date: '4 Weeks',
+    phase: '4-Week MVP Sprint',
+    description: 'One active loan with Danny, functioning contract, marketing mechanism'
   },
   {
-    date: 'Q1 2026',
-    phase: 'Fractionalization',
-    description: 'Enable micro-investments, launch secondary marketplace'
+    date: 'Weeks 5-8',
+    phase: 'Scale & Automation',
+    description: 'Expand artist pipeline, improve platform, add automation'
   },
   {
-    date: 'Q2-Q3 2026',
-    phase: 'Events & Automation',
-    description: 'Gallery partnerships, AI valuation, sustainable revenue'
+    date: 'Months 2-6',
+    phase: 'Multi-City Expansion',
+    description: 'Gallery partnerships, additional cities, mobile app'
   },
   {
-    date: '2027+',
-    phase: 'Global Expansion',
-    description: 'Multi-city launch, DeFi integration, global cooperative'
+    date: '2026+',
+    phase: 'Global Platform',
+    description: 'Global network, DeFi integration, open-source protocol'
   }
 ];
 
 export default function RoadmapPage() {
-  const [activePhase, setActivePhase] = useState('phase1');
+  const [activePhase, setActivePhase] = useState('mvp');
 
   return (
     <>
       <Head>
-        <title>Roadmap | Open Artist Bank - Building the Future of Artist Financing</title>
+        <title>4-Week MVP Sprint | Emerging Artist Credit Fund</title>
         <meta
           name="description"
-          content="Explore our 4-phase roadmap from MVP to global expansion. See how we're building the decentralized Artist Bank that transforms cultural investment."
+          content="Fast-track to market in 4 weeks. Danny + local artists, real loans, community investment. See our sprint roadmap from MVP to global expansion."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -562,11 +726,11 @@ export default function RoadmapPage() {
 
         <HeroSection>
           <HeroTitle>
-            Building the <span className="accent">Future</span><br/>
-            of Artist <span className="accent">Financing</span>
+            <span className="accent">4-Week MVP</span> Sprint<br/>
+            to Market <span className="accent">Launch</span>
           </HeroTitle>
           <HeroSubtitle>
-            Our journey from MVP to a global network of artist banks, transforming how artists access capital and communities invest in culture.
+            Fast-track launch with Danny + local artists. Prove the micro-credit + revenue-share model with real loans, real community investment, and real results.
           </HeroSubtitle>
         </HeroSection>
 
@@ -631,6 +795,39 @@ export default function RoadmapPage() {
               </MetricsGrid>
             </PhaseSection>
           ))}
+
+          {activePhase === 'mvp' && (
+            <WeeklyBreakdown>
+              <WeeklyTitle>4-Week Sprint Breakdown</WeeklyTitle>
+              <WeeklyGrid>
+                {weeklyGoals.map((week) => (
+                  <WeekCard key={week.week}>
+                    <WeekNumber>Week {week.week}</WeekNumber>
+                    <WeekTitle>{week.title}</WeekTitle>
+                    <WeekFocus>{week.focus}</WeekFocus>
+                    
+                    <SectionTitle style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
+                      🛠️ Deliverables
+                    </SectionTitle>
+                    <WeekList>
+                      {week.deliverables.map((deliverable, index) => (
+                        <WeekListItem key={index}>{deliverable}</WeekListItem>
+                      ))}
+                    </WeekList>
+                    
+                    <SectionTitle style={{ fontSize: '1.2rem', marginBottom: '1rem', marginTop: '1.5rem' }}>
+                      📊 Success Metrics
+                    </SectionTitle>
+                    <WeekList>
+                      {week.metrics.map((metric, index) => (
+                        <WeekListItem key={index}>{metric}</WeekListItem>
+                      ))}
+                    </WeekList>
+                  </WeekCard>
+                ))}
+              </WeeklyGrid>
+            </WeeklyBreakdown>
+          )}
 
           <TimelineVisualization>
             <TimelineTitle>Development Timeline</TimelineTitle>

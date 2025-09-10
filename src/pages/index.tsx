@@ -24,16 +24,16 @@ const PageWrapper = styled.div`
 `;
 
 const HeroSection = styled.section`
-  padding: 6rem 2rem;
+  padding: 4rem 2rem;
   position: relative;
-  min-height: 85vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
 
   @media (max-width: 768px) {
-    padding: 4rem 1rem;
-    min-height: 70vh;
+    padding: 3rem 1rem;
+    min-height: 60vh;
   }
 `;
 
@@ -72,14 +72,15 @@ const HeroTitle = styled.h1`
 
 const HeroSubtitle = styled.p`
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  margin-bottom: 3rem;
+  font-size: clamp(1.5rem, 2vw, 1.4rem);
+  margin-bottom: 2rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
   max-width: 500px;
 
   @media (max-width: 968px) {
     max-width: 100%;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -91,8 +92,8 @@ const HeroVisual = styled.div`
 `;
 
 const ArtworkFrame = styled.div`
-  width: 300px;
-  height: 400px;
+  width: 380px;
+  height: 500px;
   background: linear-gradient(145deg, ${({ theme }) => theme.gold}, ${({ theme }) => theme.mutedGold});
   padding: 20px;
   border-radius: 8px;
@@ -103,24 +104,9 @@ const ArtworkFrame = styled.div`
   &::before {
     content: "";
     position: absolute;
-    inset: 15px;
+    inset: 12px;
     background: ${({ theme }) => theme.white};
     border-radius: 4px;
-  }
-
-  &::after {
-    content: "Sample Artwork";
-    position: absolute;
-    inset: 15px;
-    background: linear-gradient(45deg, ${({ theme }) => theme.teal}, ${({ theme }) => theme.purple});
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${({ theme }) => theme.white};
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
   }
 
   @media (max-width: 768px) {
@@ -129,65 +115,22 @@ const ArtworkFrame = styled.div`
   }
 `;
 
-const FlowDiagram = styled.div`
+const HeroArtworkImage = styled.img`
   position: absolute;
-  right: -50px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  @media (max-width: 968px) {
-    position: static;
-    transform: none;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 2rem;
-  }
-
-  @media (max-width: 568px) {
-    flex-direction: column;
-  }
+  inset: 12px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  object-fit: cover;
+  border-radius: 4px;
+  z-index: 1;
 `;
 
-const FlowStep = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid ${({ theme }) => theme.gold};
-  border-radius: 12px;
-  padding: 1rem;
-  width: 150px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
 
-  &:hover {
-    background: rgba(212, 175, 55, 0.2);
-    transform: translateX(5px);
-  }
-
-  @media (max-width: 568px) {
-    width: 120px;
-    padding: 0.8rem;
-  }
-`;
-
-const FlowIcon = styled.div`
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-`;
-
-const FlowText = styled.div`
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.white};
-  font-weight: 500;
-`;
 
 const CTAButtons = styled.div`
   display: flex;
   gap: 1.5rem;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 
   @media (max-width: 568px) {
     flex-direction: column;
@@ -230,7 +173,7 @@ const Main = styled.main`
 `;
 
 const Section = styled.section`
-  padding: 5rem 0;
+  padding: 3rem 0;
   position: relative;
 
   &:not(:last-child)::after {
@@ -243,16 +186,24 @@ const Section = styled.section`
     height: 1px;
     background: linear-gradient(90deg, transparent, ${({ theme }) => theme.gold}40, transparent);
   }
+
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
 `;
 
 const SectionTitle = styled.h2`
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   color: ${({ theme }) => theme.gold};
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-align: center;
   font-weight: 700;
   line-height: 1.2;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const SectionSubtitle = styled.p`
@@ -260,19 +211,29 @@ const SectionSubtitle = styled.p`
   font-size: 1.2rem;
   text-align: center;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
 `;
 
 // How It Works Section
 const StepsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 3rem;
-  margin: 4rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 `;
 
 const StepCard = styled.div`
@@ -280,7 +241,7 @@ const StepCard = styled.div`
   border: 3px solid transparent;
   border-image: linear-gradient(145deg, ${({ theme }) => theme.gold}, ${({ theme }) => theme.teal}) 1;
   border-radius: 16px;
-  padding: 2.5rem;
+  padding: 2rem;
   text-align: center;
   transition: all 0.4s ease;
   position: relative;
@@ -300,12 +261,16 @@ const StepCard = styled.div`
   }
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
 
     &::before {
       opacity: 1;
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
   }
 `;
 
@@ -345,13 +310,13 @@ const StepDescription = styled.p`
 // Why Join Section
 const BenefitsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 4rem;
-  margin: 4rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+  margin: 2rem 0;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
   }
 `;
 
@@ -418,23 +383,42 @@ const CalculatorSection = styled.div`
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(64, 224, 208, 0.05));
   border: 2px solid ${({ theme }) => theme.gold}40;
   border-radius: 20px;
-  padding: 3rem;
-  margin: 4rem 0;
+  padding: 2.5rem;
+  margin: 2rem 0;
   text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    margin: 1.5rem 0;
+  }
 `;
 
 const CalculatorTitle = styled.h3`
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   color: ${({ theme }) => theme.gold};
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const CalculatorGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin: 3rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const CalculatorCard = styled.div`
@@ -462,10 +446,14 @@ const CalculatorValue = styled.div`
 `;
 
 const SliderContainer = styled.div`
-  margin: 3rem 0;
+  margin: 2rem 0;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
+
+  @media (max-width: 768px) {
+    margin: 1.5rem 0;
+  }
 `;
 
 const SliderLabel = styled.label`
@@ -511,9 +499,14 @@ const Slider = styled.input`
 // Marketplace Preview Section
 const MarketplaceGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
-  margin: 4rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
 `;
 
 const ArtworkCard = styled.div`
@@ -604,16 +597,26 @@ const MembershipSection = styled.div`
   background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(64, 224, 208, 0.1));
   border: 2px solid ${({ theme }) => theme.purple}40;
   border-radius: 20px;
-  padding: 4rem;
+  padding: 3rem;
   text-align: center;
-  margin: 5rem 0;
+  margin: 2rem 0;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    margin: 1.5rem 0;
+  }
 `;
 
 const MembershipTitle = styled.h3`
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
   color: ${({ theme }) => theme.purple};
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const MembershipPrice = styled.div`
@@ -632,12 +635,24 @@ const MembershipPrice = styled.div`
     font-size: 1.5rem;
     color: rgba(255, 255, 255, 0.7);
   }
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+    
+    .currency {
+      font-size: 1.5rem;
+    }
+    
+    .period {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 const MembershipBenefits = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 3rem 0;
+  margin: 2rem 0;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -664,15 +679,24 @@ const MembershipBenefit = styled.li`
 // Community Trust Section
 const TrustSection = styled.div`
   text-align: center;
-  padding: 4rem 0;
+  padding: 2rem 0;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 0;
+  }
 `;
 
 const PartnersGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 2rem;
-  margin: 3rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
   align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
 `;
 
 const PartnerLogo = styled.div`
@@ -696,9 +720,14 @@ const PartnerLogo = styled.div`
 
 const TestimonialGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin: 4rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 `;
 
 const TestimonialCard = styled.div`
@@ -739,10 +768,15 @@ const TestimonialAuthor = styled.div`
 const FinalCTASection = styled.section`
   background: linear-gradient(135deg, ${({ theme }) => theme.gold}, ${({ theme }) => theme.mutedGold});
   color: ${({ theme }) => theme.darkBg};
-  padding: 5rem 2rem;
+  padding: 3rem 2rem;
   text-align: center;
-  margin: 5rem 0 0 0;
+  margin: 2rem 0 0 0;
   border-radius: 20px 20px 0 0;
+
+  @media (max-width: 768px) {
+    padding: 2.5rem 1rem;
+    border-radius: 16px 16px 0 0;
+  }
 `;
 
 const FinalCTATitle = styled.h2`
@@ -756,19 +790,24 @@ const FinalCTATitle = styled.h2`
 const FinalCTASubtitle = styled.p`
   font-family: 'Inter', sans-serif;
   font-size: 1.3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
   opacity: 0.9;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const FinalCTAButtons = styled.div`
   display: flex;
   gap: 2rem;
   justify-content: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 
   @media (max-width: 568px) {
     flex-direction: column;
@@ -858,34 +897,15 @@ export default function ArtLending() {
                 <CTAButton variant="primary">Start as an Artist</CTAButton>
                 <CTAButton variant="secondary">Start as a Backer</CTAButton>
               </CTAButtons>
-              <CTAButtons style={{ marginTop: '1rem', justifyContent: 'center' }}>
-                <CTAButton 
-                  as="a" 
-                  href="/roadmap" 
-                  variant="secondary" 
-                  style={{ minWidth: '200px', textAlign: 'center' }}
-                >
-                  📍 View Our Roadmap
-                </CTAButton>
-              </CTAButtons>
             </HeroContent>
             
             <HeroVisual>
-              <ArtworkFrame />
-              <FlowDiagram>
-                <FlowStep>
-                  <FlowIcon>💰</FlowIcon>
-                  <FlowText>Loan</FlowText>
-                </FlowStep>
-                <FlowStep>
-                  <FlowIcon>🪙</FlowIcon>
-                  <FlowText>Tokens</FlowText>
-                </FlowStep>
-                <FlowStep>
-                  <FlowIcon>📈</FlowIcon>
-                  <FlowText>Returns</FlowText>
-                </FlowStep>
-              </FlowDiagram>
+              <ArtworkFrame>
+                <HeroArtworkImage 
+                  src="/images/danny-journey.jpg" 
+                  alt="Danny's Journey - Mixed Media Artwork"
+                />
+              </ArtworkFrame>
             </HeroVisual>
           </HeroContainer>
         </HeroSection>
