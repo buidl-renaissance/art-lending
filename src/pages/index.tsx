@@ -115,15 +115,6 @@ const ArtworkFrame = styled.div`
   }
 `;
 
-const HeroArtworkImage = styled.img`
-  position: absolute;
-  inset: 12px;
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
-  object-fit: cover;
-  border-radius: 4px;
-  z-index: 1;
-`;
 
 
 
@@ -894,18 +885,19 @@ export default function ArtLending() {
                 Back artists with small loans secured by their artwork — and share in the rewards when they sell.
               </HeroSubtitle>
               <CTAButtons>
-                <CTAButton variant="primary">Start as an Artist</CTAButton>
+                <CTAButton 
+                  as="a" 
+                  href="/canvas-loans" 
+                  variant="primary"
+                >
+                  🎁 Join Collective
+                </CTAButton>
                 <CTAButton variant="secondary">Start as a Backer</CTAButton>
               </CTAButtons>
             </HeroContent>
             
             <HeroVisual>
-              <ArtworkFrame>
-                <HeroArtworkImage 
-                  src="/images/danny-journey.jpg" 
-                  alt="Danny's Journey - Mixed Media Artwork"
-                />
-              </ArtworkFrame>
+              <ArtworkFrame />
             </HeroVisual>
           </HeroContainer>
         </HeroSection>
@@ -1114,9 +1106,9 @@ export default function ArtLending() {
             <FinalCTAButton variant="secondary">List Your Artwork</FinalCTAButton>
           </FinalCTAButtons>
           <SocialLinks>
+            <SocialLink href="/canvas-loans">🎁 Canvas Gift</SocialLink>
             <SocialLink href="/roadmap">View Roadmap</SocialLink>
             <SocialLink href="#">Join Discord</SocialLink>
-            <SocialLink href="#">Follow Updates</SocialLink>
             <SocialLink href="#">Newsletter</SocialLink>
           </SocialLinks>
         </FinalCTASection>
